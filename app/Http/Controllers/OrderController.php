@@ -91,9 +91,13 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $orden = Order::find ($request->id);
+        $orden->existencia = $request->existencia;
+        $orden->cantidad = $request->cantidad;
+        $orden->save();
+        return response()->json($orden);
     }
 
     /**
@@ -102,8 +106,14 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            
+            Order::findOrFail($request->id)->delete();
+            return response()->json();
+        }
+        
+        return redirect()->route('order.create');
     }
 }

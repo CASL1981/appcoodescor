@@ -22,6 +22,11 @@ class Article extends Model
     	return $this->belongsTo(Creditor::class);
     }
 
+    public function orders(){
+
+        return $this->hasMany(Order::class, 'id', 'artciulo_id');
+    }
+
 
     public function setNameAttribute($value){
     	$this->attributes['name'] = strtoupper($value);

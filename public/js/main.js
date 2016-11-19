@@ -44,3 +44,9 @@ function add(objeto, ruta){
       $('#cantidad').val('');
     });
 }
+
+// edit function modal
+
+
+
+

@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
+	use SoftDeletes;
     //modelo de pedido solitados
     protected $table = "orders";
 
@@ -15,4 +17,9 @@ class Order extends Model
 
     	return $this->belongsTo(Stationery::class);
     }
+
+    public function article()
+	{
+	    return $this->belongsTo(Article::class);
+	}
 }

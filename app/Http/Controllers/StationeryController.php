@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\User;
 use App\Stationery;
 use App\Article;
+use App\Order;
 
 class StationeryController extends Controller
 {
@@ -84,7 +85,13 @@ class StationeryController extends Controller
         //consulta para generar el select de acreedores
         $article = Article::lists('name', 'id');
 
-        return view('papeleria.create', compact('requisicion', 'article'));
+        //consulta para visualizar los articulos solicitados
+        //$orden = Order::where('papeleria_id', $id)->get();
+        $orden = Article::find($id)->orders;
+
+        // var_dump($orden);
+
+        return view('papeleria.create', compact('requisicion', 'article', 'orden'));
 
     }
 
